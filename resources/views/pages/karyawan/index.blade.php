@@ -40,16 +40,16 @@
     <div class="bg-overlay"></div>
     <div class="login-box">
         <div class="login-logo">
-            <a href=""><b>{{ env('APP_NAME', 'Laravel') }} Admin</b></a>
+            <a href=""><b>{{ env('APP_NAME', 'Laravel') }}</b></a>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Tulis UUID dan Tanggal Lahir (thn-bln-hari) Untuk Melihat Data Slip Gaji.</p>
         
-                <form method="POST" action="{{ route('auth.login') }}">
+                <form method="POST" action="{{ route('karyawan.home') }}">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="username" value="{{ old('username') }}" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="Username">
+                        <input type="uuid" value="{{ old('uuid') }}" name="uuid" class="form-control @error('username') is-invalid @enderror" placeholder="UUID">
                         <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -57,26 +57,14 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                        <input name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" type="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" placeholder="Tanggal Lahir... Ex : 2002-04-24">
                         <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                            <span class="fas fa-calendar-alt"></span>
                         </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                        </div>
-                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Lihat</button>
                 </form>
             </div>
             <div class="card-footer text-center">&copy; 2020 {{ env('APP_NAME', 'Laravel') }}</div>

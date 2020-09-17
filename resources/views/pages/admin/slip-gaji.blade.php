@@ -10,7 +10,11 @@
                             <i class="fa fa-user mr-2"></i>
                             Master Data Slip Gaji
                         </h3>
-
+                        <form ref="form" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="action" value="import">
+                            <input name="file" type="file" ref="file" @change="fileOnChange" style="display: none;">
+                        </form>
                         <span class="card-right-button">
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -20,10 +24,21 @@
                                     <a href="#" @click.prevent="addModal" class="dropdown-item">
                                         <i class="fa fa-plus mr-2"></i> New
                                     </a>
-                                    <a href="#" @click.prevent="addModal" class="dropdown-item">
+                                    <a href="#" @click.prevent="openFile" class="dropdown-item">
                                         <i class="fa fa-file-excel mr-2"></i> Import Excel
                                     </a>
-                                    <a href="#" @click.prevent="addModal" class="dropdown-item">
+                                    <form ref="formExport" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="action" value="export">
+                                    </form>
+                                    <a href="#" @click.prevent="exportExcel" class="dropdown-item">
+                                        <i class="fa fa-file-excel mr-2"></i> Export Excel
+                                    </a>
+                                    <form ref="formDestroy" action="{{ route('admin.slip-gaji.destroy') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                    <a href="#" @click.prevent="$refs.formDestroy.submit()" class="dropdown-item">
                                         <i class="fa fa-trash mr-2"></i> Delete All
                                     </a>
                                 </div>
@@ -34,20 +49,22 @@
                         <table id="table" class="table table-bordered table-hover table-responsive">
                             <thead>
                                 <th width="6%">#</th>
-                                <th>nama</th>
-                                <th>bagian</th>
-                                <th>outsourcing</th>
-                                <th>hari_gaji_pokok</th>
-                                <th>hari_diliburkan</th>
-                                <th>hari_borongan</th>
-                                <th>hari_gp7</th>
-                                <th>lembur_1</th>
-                                <th>lembur_2</th>
-                                <th>lembur_3</th>
-                                <th>sub_kerja</th>
-                                <th>sub_lembur</th>
-                                <th>bpjs</th>
-                                <th>total</th>
+                                <th>Uuid</th>
+                                <th>Nama</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Bagian</th>
+                                <th>Outsourcing</th>
+                                <th>Hari Gaji Pokok</th>
+                                <th>Hari Diliburkan</th>
+                                <th>Hari Borongan</th>
+                                <th>Hari Gp7</th>
+                                <th>Lembur 1</th>
+                                <th>Lembur 2</th>
+                                <th>Lembur 3</th>
+                                <th>Sub Kerja</th>
+                                <th>Sub Lembur</th>
+                                <th>Bpjs</th>
+                                <th>Total</th>
                             </thead>
                         </table>
                     </div>
@@ -64,6 +81,15 @@
             data: {
             },
             methods: {
+                exportExcel () {
+                    this.$refs.formExport.submit()
+                },
+                openFile () {
+                    this.$refs.file.click()
+                },
+                fileOnChange () {
+                    this.$refs.form.submit()
+                }
             }
         });
         $('#table').DataTable({
@@ -75,7 +101,9 @@
             columnDefs: [ { orderable: false, targets: [3] }, ],
             columns: [
                 { render: (data, type, row, meta) => meta.row + meta.settings._iDisplayStart + 1 },
+                { data: 'uuid' },
                 { data: 'nama' },
+                { data: 'tanggal_lahir' },
                 { data: 'bagian' },
                 { data: 'outsourcing' },
                 { data: 'hari_gaji_pokok' },

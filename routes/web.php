@@ -17,6 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group([
+    'prefix' => 'karyawan',
+    'namespace' => 'Karyawan\\',
+    'as' => 'karyawan.'
+], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::post('/', 'HomeController@post')->name('home.post');
+});
+
 /**
  * Admin
  */
@@ -28,6 +37,8 @@ Route::group([
 ], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/slip-gaji', 'SlipGajiController@index')->name('slip-gaji');
+    Route::post('/slip-gaji', 'SlipGajiController@post')->name('slip-gaji.post');
+    Route::delete('/slip-gaji/destroy', 'SlipGajiController@destroy')->name('slip-gaji.destroy');
 });
 
 /**

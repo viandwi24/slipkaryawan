@@ -74,6 +74,7 @@
     <script src="{{ asset('assets/plugins/vue/vue.min.js') }}"></script>
     <script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
     @stack('js-lib')
+    @include('components.admin-javascript')
     @stack('js')
 </body>
 </html>

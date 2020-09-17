@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\SlipGaji;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Webpatser\Uuid\Uuid;
 
 class SlipGajiSeeder extends Seeder
 {
@@ -13,7 +15,9 @@ class SlipGajiSeeder extends Seeder
     public function run()
     {
         SlipGaji::create([
+            'uuid' => Uuid::generate()->string,
             'nama' => 'tes',
+            'tanggal_lahir' => (new Carbon('24-04-2002')),
             'bagian' => 'awe',
             'outsourcing' => 'ewa',
             'hari_gaji_pokok' => 1,

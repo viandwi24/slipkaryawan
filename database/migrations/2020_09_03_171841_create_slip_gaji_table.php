@@ -15,9 +15,11 @@ class CreateSlipGajiTable extends Migration
     {
         Schema::create('slip_gaji', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             
             // general
             $table->string('nama', 255);
+            $table->date('tanggal_lahir');
             $table->string('bagian', 255);
             $table->string('outsourcing', 255);
 
@@ -33,10 +35,10 @@ class CreateSlipGajiTable extends Migration
             $table->integer('lembur_3');
 
             // total
-            $table->decimal('sub_kerja');
-            $table->decimal('sub_lembur');
-            $table->decimal('bpjs');
-            $table->decimal('total');
+            $table->integer('sub_kerja');
+            $table->integer('sub_lembur');
+            $table->integer('bpjs');
+            $table->integer('total');
 
             // lain
             $table->timestamps();
