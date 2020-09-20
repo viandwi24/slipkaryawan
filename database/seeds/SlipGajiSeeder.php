@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Periode;
 use App\Models\SlipGaji;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -14,8 +15,13 @@ class SlipGajiSeeder extends Seeder
      */
     public function run()
     {
+        Periode::create([
+            'mulai' => (new Carbon('2020-04-24')),
+            'selesai' => (new Carbon('2020-05-23')),
+        ]);
         SlipGaji::create([
-            'uuid' => Uuid::generate()->string,
+            'periode_id' => 1,
+            'uid' => Uuid::generate()->string,
             'nama' => 'tes',
             'tanggal_lahir' => (new Carbon('24-04-2002')),
             'bagian' => 'awe',

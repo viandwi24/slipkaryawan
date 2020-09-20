@@ -15,7 +15,8 @@ class CreateSlipGajiTable extends Migration
     {
         Schema::create('slip_gaji', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
+            $table->string('uid', 255);
+            $table->bigInteger("periode_id")->unsigned();
             
             // general
             $table->string('nama', 255);
@@ -42,6 +43,7 @@ class CreateSlipGajiTable extends Migration
 
             // lain
             $table->timestamps();
+            $table->foreign("periode_id")->references('id')->on('periode')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

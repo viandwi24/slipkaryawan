@@ -44,12 +44,12 @@
         </div>
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Tulis UUID dan Tanggal Lahir (thn-bln-hari) Untuk Melihat Data Slip Gaji.</p>
+                <p class="login-box-msg">Tulis UID dan Tanggal Lahir (thn-bln-hari) Untuk Melihat Data Slip Gaji.</p>
         
                 <form method="POST" action="{{ route('karyawan.home') }}">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="uuid" value="{{ old('uuid') }}" name="uuid" class="form-control @error('username') is-invalid @enderror" placeholder="UUID">
+                        <input type="uid" value="{{ old('uid') }}" name="uid" class="form-control @error('username') is-invalid @enderror" placeholder="UID">
                         <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>

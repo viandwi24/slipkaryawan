@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="fa fa-user mr-2"></i>
-                            Master Data Slip Gaji
+                            Master Data Slip Gaji [Periode {{ $periode->mulai->format('d/m/Y') }} - {{ $periode->selesai->format('d/m/Y') }}]
                         </h3>
                         <form ref="form" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -49,7 +49,7 @@
                         <table id="table" class="table table-bordered table-hover table-responsive">
                             <thead>
                                 <th width="6%">#</th>
-                                <th>Uuid</th>
+                                <th>Uid</th>
                                 <th>Nama</th>
                                 <th>Tanggal Lahir</th>
                                 <th>Bagian</th>
@@ -93,7 +93,7 @@
             }
         });
         $('#table').DataTable({
-            ajax: "{{ route('admin.slip-gaji') }}",
+            ajax: "{{ route('admin.slip-gaji') }}?periode={{ $periode->id }}",
             processing: true,
             serverSide: true,
             // responsive: true,
@@ -101,7 +101,7 @@
             columnDefs: [ { orderable: false, targets: [3] }, ],
             columns: [
                 { render: (data, type, row, meta) => meta.row + meta.settings._iDisplayStart + 1 },
-                { data: 'uuid' },
+                { data: 'uid' },
                 { data: 'nama' },
                 { data: 'tanggal_lahir' },
                 { data: 'bagian' },

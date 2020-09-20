@@ -16,12 +16,12 @@ class HomeController extends Controller
     public function post(Request $request)
     {
         $request->validate([
-            'uuid' => 'required|uuid',
+            'uid' => 'required',
             'tanggal_lahir' => 'required|date_format:Y-m-d'
         ]);
 
         // check db
-        $slipgaji = SlipGaji::where('uuid', $request->uuid)
+        $slipgaji = SlipGaji::where('uid', $request->uid)
             ->where('tanggal_lahir', $request->tanggal_lahir)
             ->first();
         

@@ -3,14 +3,19 @@
 namespace App\Imports;
 
 use App\Models\SlipGaji;
-use Carbon\Carbon as CarbonCarbon;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Webpatser\Uuid\Uuid;
 
 class SlipGajiImport implements ToModel, WithHeadingRow
 {
+    public $periode_id;
+
+    public function __construct($periode_id)
+    {
+        $this->periode_id = $periode_id;
+    }
     /**
     * @param array $row
     *
@@ -18,17 +23,17 @@ class SlipGajiImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        // dd($row);
         $result = [
+            'periode_id' => $this->periode_id,
+            'uid' => $row['uid'],
             'nama' => $row['nama'],
-            // 'uuid' => Uuid::generate()->string,
-            'tanggal_lahir' => (new CarbonCarbon($row['tanggal_lahir'])),
+            'tanggal_lahir' => (new Carbon(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['tanggal_lahir']))),
             'bagian' => $row['bagian'],
             'outsourcing' => $row['outsourcing'],
-            'hari_gaji_pokok' => $row['gaji_pokok'],
-            'hari_diliburkan' => $row['diliburkan'],
-            'hari_borongan' => $row['borongan'],
-            'hari_gp7' => $row['gp7'],
+            'hari_gaji_pokok' => $row['hari_gaji_pokok'],
+            'hari_diliburkan' => $row['hari_diliburkan'],
+            'hari_borongan' => $row['hari_borongan'],
+            'hari_gp7' => $row['hari_gp7'],
             'lembur_1' => $row['lembur_1'],
             'lembur_2' => $row['lembur_2'],
             'lembur_3' => $row['lembur_3'],

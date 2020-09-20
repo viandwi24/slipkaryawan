@@ -39,6 +39,11 @@ Route::group([
     Route::get('/slip-gaji', 'SlipGajiController@index')->name('slip-gaji');
     Route::post('/slip-gaji', 'SlipGajiController@post')->name('slip-gaji.post');
     Route::delete('/slip-gaji/destroy', 'SlipGajiController@destroy')->name('slip-gaji.destroy');
+
+    // aweawe
+    Route::get('/periode/create', 'PeriodeController@create')->name('periode.create');
+    Route::post('/periode/create', 'PeriodeController@store')->name('periode.store');
+    Route::delete('/periode/{periode}', 'PeriodeController@destroy')->name('periode.destroy');
 });
 
 /**

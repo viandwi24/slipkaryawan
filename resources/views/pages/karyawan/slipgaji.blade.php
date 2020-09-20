@@ -45,9 +45,9 @@
                     <div class="card-body login-card-body">
                         <table>
                             <tr>
-                                <th>Uuid</th>
+                                <th>Uid</th>
                                 <td class="text-right" width="5%">:</td>
-                                <td>{{ $slipgaji->uuid }}</td>
+                                <td>{{ $slipgaji->uid }}</td>
                             </tr>
                             <tr>
                                 <th>Nama</th>
