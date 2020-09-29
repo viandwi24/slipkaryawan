@@ -15,13 +15,13 @@
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                {{-- <a class="dropdown-item" href="{{ route('auth.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                <a class="dropdown-item" href="{{ route('auth.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt mr-2"></i>
                     Logout
                 </a>
                 <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
                     @csrf
-                </form> --}}
+                </form>
             </div>
         </li>
     </ul>

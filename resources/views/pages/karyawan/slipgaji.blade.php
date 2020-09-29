@@ -39,110 +39,123 @@
 <body class="hold-transition login-page bg-image">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-9">
+            <div class="col-md-9 col-sm-12">
                 <div class="card mt-4">
-                    <div class="card-header">Slip Gaji</div>
+                    <div class="card-header">Informasi Karyawan</div>
                     <div class="card-body login-card-body">
                         <table>
                             <tr>
                                 <th>Uid</th>
                                 <td class="text-right" width="5%">:</td>
-                                <td>{{ $slipgaji->uid }}</td>
+                                <td>{{ $slipgaji[0]->uid }}</td>
                             </tr>
                             <tr>
                                 <th>Nama</th>
                                 <td class="text-right" width="5%">:</td>
-                                <td>{{ $slipgaji->nama }}</td>
+                                <td>{{ $slipgaji[0]->nama }}</td>
                             </tr>
                             <tr>
                                 <th>Tanggal Lahir</th>
                                 <td class="text-right" width="5%">:</td>
-                                <td>{{ $slipgaji->tanggal_lahir }}</td>
+                                <td>{{ $slipgaji[0]->tanggal_lahir }}</td>
                             </tr>
                             <tr>
                                 <th>Bagian</th>
                                 <td class="text-right" width="5%">:</td>
-                                <td>{{ $slipgaji->bagian }}</td>
+                                <td>{{ $slipgaji[0]->bagian }}</td>
                             </tr>
                             <tr>
                                 <th>Outsourcing</th>
                                 <td class="text-right" width="5%">:</td>
-                                <td>{{ $slipgaji->outsourcing }}</td>
+                                <td>{{ $slipgaji[0]->outsourcing }}</td>
                             </tr>
-                        </table>
-
-                        <table class="table table-bordered mt-2">
-                            <tr>
-                                <th width="25%">Hari Kerja</th>
-                                <td class="text-right" width="5%">:</td>
-                                <td>{{ $slipgaji->hari_gaji_pokok }}</td>
-                            </tr>
-                            <tr>
-                                <th width="25%">Hari Diliburkan</th>
-                                <td class="text-right" width="5%">:</td>
-                                <td>{{ $slipgaji->hari_diliburkan }}</td>
-                            </tr>
-                            <tr>
-                                <th width="25%">Hari Borongan</th>
-                                <td class="text-right" width="5%">:</td>
-                                <td>{{ $slipgaji->hari_borongan }}</td>
-                            </tr>
-                            <tr>
-                                <th width="25%">GP7</th>
-                                <td class="text-right" width="5%">:</td>
-                                <td>{{ $slipgaji->hari_gp7 }}</td>
-                            </tr>
-                        </table>
-
-                        
-                    <table class="table table-bordered mt-2">
-                        <tr>
-                            <th width="25%">Lembur 1</th>
-                            <td class="text-right" width="5%">:</td>
-                            <td>{{ $slipgaji->lembur_1 }}</td>
-                        </tr>
-                        <tr>
-                            <th width="25%">Lembur 2</th>
-                            <td class="text-right" width="5%">:</td>
-                            <td>{{ $slipgaji->lembur_2 }}</td>
-                        </tr>
-                        <tr>
-                            <th width="25%">Lembur 3</th>
-                            <td class="text-right" width="5%">:</td>
-                            <td>{{ $slipgaji->lembur_3 }}</td>
-                        </tr>
-                    </table>
-
-                        <table class="table table-bordered mt-2">
-                            <thead>
-                                <th>#</th>
-                                <th>Pendapatan</th>
-                                <th>Nominal</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Hari Kerja</td>
-                                    <td>@rupiah($slipgaji->sub_kerja)</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Lembur</td>
-                                    <td>@rupiah($slipgaji->sub_lembur)</td>
-                                </tr>
-                                <tr>
-                                    <th colspan="2" class="text-right">Bpjs :</th>
-                                    <td>@rupiah($slipgaji->bpjs)</td>
-                                </tr>
-                                <tr>
-                                    <th colspan="2" class="text-right">Total :</th>
-                                    <td>@rupiah($slipgaji->total)</td>
-                                </tr>
-                            </tbody>
                         </table>
                     </div>
-                    <div class="card-footer text-center">&copy; 2020 {{ env('APP_NAME', 'Laravel') }}</div>
                 </div>
+                @php $i = 0; @endphp
+                @foreach ($slipgaji as $item)
+                    @php $i++; @endphp
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ $item->id }}" aria-expanded="true" aria-controls="collapse{{ $item->id }}">
+                                        {{ $i }}.) Periode [{{ $item->periode->mulai->format('d/m/Y') }} - {{ $item->periode->selesai->format('d/m/Y') }}]
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapse{{ $item->id }}" class="collapse" aria-labelledby="heading{{ $item->id }}" data-parent="#accordion">
+                                <div class="card-body">
+                                    <table class="table table-bordered mt-2">
+                                        <tr>
+                                            <th width="25%">Hari Kerja</th>
+                                            <td class="text-right" width="5%">:</td>
+                                            <td>{{ $item->hari_gaji_pokok }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th width="25%">Hari Diliburkan</th>
+                                            <td class="text-right" width="5%">:</td>
+                                            <td>{{ $item->hari_diliburkan }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th width="25%">Hari Borongan</th>
+                                            <td class="text-right" width="5%">:</td>
+                                            <td>{{ $item->hari_borongan }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th width="25%">GP7</th>
+                                            <td class="text-right" width="5%">:</td>
+                                            <td>{{ $item->hari_gp7 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th width="25%">Lembur 1</th>
+                                            <td class="text-right" width="5%">:</td>
+                                            <td>{{ $item->lembur_1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th width="25%">Lembur 2</th>
+                                            <td class="text-right" width="5%">:</td>
+                                            <td>{{ $item->lembur_2 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th width="25%">Lembur 3</th>
+                                            <td class="text-right" width="5%">:</td>
+                                            <td>{{ $item->lembur_3 }}</td>
+                                        </tr>
+                                    </table>
+
+                                    <table class="table table-bordered mt-2">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>Pendapatan</th>
+                                            <th>Nominal</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Hari Kerja</td>
+                                                <td>@rupiah($item->sub_kerja)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Lembur</td>
+                                                <td>@rupiah($item->sub_lembur)</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2" class="text-right">Bpjs :</th>
+                                                <td>@rupiah($item->bpjs)</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2" class="text-right">Total :</th>
+                                                <td>@rupiah($item->total)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

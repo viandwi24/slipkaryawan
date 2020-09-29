@@ -23,7 +23,7 @@ class HomeController extends Controller
         // check db
         $slipgaji = SlipGaji::where('uid', $request->uid)
             ->where('tanggal_lahir', $request->tanggal_lahir)
-            ->first();
+            ->get();
         
         if (!$slipgaji) return back()->withInput()->withErrors(['credentials' => 'Data tidak ditemukan.']);
 

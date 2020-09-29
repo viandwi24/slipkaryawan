@@ -65,6 +65,7 @@
                                 <th>Sub Lembur</th>
                                 <th>Bpjs</th>
                                 <th>Total</th>
+                                <th>...</th>
                             </thead>
                         </table>
                     </div>
@@ -116,7 +117,22 @@
                 { data: 'sub_kerja' },
                 { data: 'sub_lembur' },
                 { data: 'bpjs' },
-                { data: 'total' }
+                { data: 'total' },
+                {
+                    data: null,
+                    render: function ( data, type, row ) {
+                        // <a href="{{ url('admin/periode') . '/' }}`+data.id+`/edit" class="btn btn-sm btn-icon text-white btn-warning"><i class="fa fa-edit"></i></a>
+                        return `
+                        <div class="btn-group mb-3" role="group">
+                            <form method="post" action="{{ route('admin.slip-gaji') . '/' }}`+data.id+`?periode={{ $periode->id }}">
+                                @method('delete')
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-icon text-white btn-danger"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </div>
+                        `;
+                    }
+                }
             ]
         });
     </script>    

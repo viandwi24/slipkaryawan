@@ -76,6 +76,15 @@ class SlipGajiController extends Controller
         }
     }
 
+    public function delete($id)
+    {
+        $destroy = SlipGaji::findOrFail($id)->delete();
+        return redirect()->back()->with('alert', [
+            'type' => 'success',
+            'text' => 'Berhasil di delete.'
+        ]);
+    }
+
     public function destroy(Request $request)
     {
         $destroy = SlipGaji::query()->delete();

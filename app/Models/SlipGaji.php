@@ -26,4 +26,9 @@ class SlipGaji extends Model
         'total',
         'bpjs'
     ];
+
+    public function periode()
+    {
+        return $this->belongsTo(Periode::class);
+    }
 }
