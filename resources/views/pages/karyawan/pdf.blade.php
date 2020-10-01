@@ -13,6 +13,7 @@
             page-break-before: always !important;
             page-break-inside: avoid !important;
         }
+        table.no-border * { border: none; }
         table tr td,
         table tr th, table thead * {
             font-size: 9pt!important;
@@ -27,10 +28,8 @@
         @php $i = 0; @endphp
         @foreach ($slipgaji as $item)
             @php $i++; @endphp
-            <div class="center">
-                <center>
-                    <h6 class="mb-4">SLIP GAJI KARYAWAN {{ strtoupper($item->outsourcing) }}</h6>
-                </center>
+            <div class="text-center">
+                <h6 class="mb-4">SLIP GAJI KARYAWAN {{ strtoupper($item->outsourcing) }}</h6>
             </div>
             <table class="table table-bordered">
                 <tr>
@@ -132,7 +131,21 @@
                     </tr>
                 </tbody>
             </table>
-            
+
+            <table class="mt-2 table no-border">
+                <tr>
+                    <td class="text-center">{{ $item->created_at->format('d-m-Y h:m') }}</td>
+                    <td class="70%"></td>
+                    <td>
+                        <div class="text-center">
+                            TTD
+                            <div class="height: 250px;">&nbsp;</div>
+                            BAGIAN KEUANGAN
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
             @if ($i != count($slipgaji))
                 <div class="page-break"></div>
             @endif
