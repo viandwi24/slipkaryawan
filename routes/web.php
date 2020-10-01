@@ -24,6 +24,7 @@ Route::group([
 ], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::post('/', 'HomeController@post')->name('home.post');
+    Route::post('/pdf', 'HomeController@print')->name('pdf');
 });
 
 /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Karyawan;
 
 use App\Http\Controllers\Controller;
 use App\Models\SlipGaji;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,11 +26,26 @@ class HomeController extends Controller
             ->where('tanggal_lahir', $request->tanggal_lahir)
             ->get();
         
-        if (!$slipgaji) return back()->withInput()->withErrors(['credentials' => 'Data tidak ditemukan.']);
+        if (count($slipgaji) == 0) return back()->withInput()->withErrors(['credentials' => 'Data tidak ditemukan.']);
 
         return view('pages.karyawan.slipgaji', compact('slipgaji'));
-        
-        // return $slipgaji;
-        // return $request->all();
+    }
+
+    public function print(Request $request)
+    {
+       
+        // validate
+        if (!$request->has('uid')) return route('karyawan.home');
+
+        // check db
+        $slipgaji = SlipGaji::where('uid', $request->uid)->get();
+        if (count($slipgaji) == 0) return back()->withInput()->withErrors(['credentials' => 'Data tidak ditemukan.']);
+
+        // 
+        $pdf = PDF::loadView('pages.karyawan.pdf', compact('slipgaji'));
+        return $pdf->stream('slipgaji-'. $request->uid .'.pdf');
+
+        // 
+        return $request->all();
     }
 }

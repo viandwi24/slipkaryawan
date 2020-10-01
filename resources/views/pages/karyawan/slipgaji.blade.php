@@ -41,7 +41,16 @@
         <div class="row justify-content-center">
             <div class="col-md-9 col-sm-12">
                 <div class="card mt-4">
-                    <div class="card-header">Informasi Karyawan</div>
+                    <div class="card-header">
+                        Informasi Karyawan
+                        <span class="float-right">
+                            <form action="{{ route('karyawan.pdf') }}" method="POST" style="display: inline;">
+                                @csrf
+                                <input type="hidden" name="uid" value="{{ $slipgaji[0]->uid }}">
+                                <button class="btn btn-sm btn-primary">Print Pdf</button>
+                            </form>
+                        </span>
+                    </div>
                     <div class="card-body login-card-body">
                         <table>
                             <tr>
