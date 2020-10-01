@@ -24,42 +24,46 @@
 </head>
 <body>
     <div class="content">
-        <table class="table table-bordered">
-            <tr>
-                <th>Uid</th>
-                <td class="text-right" width="5%">:</td>
-                <td>{{ $slipgaji[0]->uid }}</td>
-            </tr>
-            <tr>
-                <th>Nama</th>
-                <td class="text-right" width="5%">:</td>
-                <td>{{ $slipgaji[0]->nama }}</td>
-            </tr>
-            <tr>
-                <th>Tanggal Lahir</th>
-                <td class="text-right" width="5%">:</td>
-                <td>{{ $slipgaji[0]->tanggal_lahir }}</td>
-            </tr>
-            <tr>
-                <th>Bagian</th>
-                <td class="text-right" width="5%">:</td>
-                <td>{{ $slipgaji[0]->bagian }}</td>
-            </tr>
-            <tr>
-                <th>Outsourcing</th>
-                <td class="text-right" width="5%">:</td>
-                <td>{{ $slipgaji[0]->outsourcing }}</td>
-            </tr>
-        </table>
-
-
         @php $i = 0; @endphp
         @foreach ($slipgaji as $item)
             @php $i++; @endphp
+            <div class="center">
+                <center>
+                    <h6 class="mb-4">SLIP GAJI KARYAWAN {{ strtoupper($item->outsourcing) }}</h6>
+                </center>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Uid</th>
+                    <td class="text-right" width="5%">:</td>
+                    <td>{{ $item->uid }}</td>
+                </tr>
+                <tr>
+                    <th>Nama</th>
+                    <td class="text-right" width="5%">:</td>
+                    <td>{{ $item->nama }}</td>
+                </tr>
+                <tr>
+                    <th>Tanggal Lahir</th>
+                    <td class="text-right" width="5%">:</td>
+                    <td>{{ $item->tanggal_lahir }}</td>
+                </tr>
+                <tr>
+                    <th>Bagian</th>
+                    <td class="text-right" width="5%">:</td>
+                    <td>{{ $item->bagian }}</td>
+                </tr>
+                <tr>
+                    <th>Outsourcing</th>
+                    <td class="text-right" width="5%">:</td>
+                    <td>{{ $item->outsourcing }}</td>
+                </tr>
+            </table>
+
             <table class="table table-bordered mt-2 mb-0">
                 <tr>
                     <th colspan="3" class="center">
-                        {{ $i }}.) Periode [{{ $item->periode->mulai->format('d/m/Y') }} - {{ $item->periode->selesai->format('d/m/Y') }}]
+                        {{ $item->periode->mulai->format('d/m/Y') }} - {{ $item->periode->selesai->format('d/m/Y') }}
                     </th>
                 </tr>
                 <tr>
@@ -128,6 +132,7 @@
                     </tr>
                 </tbody>
             </table>
+            
             @if ($i != count($slipgaji))
                 <div class="page-break"></div>
             @endif
